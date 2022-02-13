@@ -20,6 +20,8 @@ class Item():
         a tag to describe the item ["book", "food", "medical product", "other"]
     basic_rate : float
         basic sales tax (default is 0.1)
+    import_rate : float
+        import duty (default is 0.05)
     exemptions : List[str]
         list of types of products that are exempt from tax
     """
@@ -29,6 +31,7 @@ class Item():
     __price: float
     __tag: str
     basic_rate: float = 0.1
+    import_rate: float = 0.05
     exemptions: List[str] = ["book", "food", "medical product"]
 
     def __init__(self, quantity: int, name: str, price: float, tag: str = None) -> None:
@@ -138,6 +141,8 @@ class Item():
             the sales tax of the item
         """
         rate = 0.0
+        if "imported" in self.__name:
+            rate += self.import_rate
         if self.__tag not in self.exemptions:
             rate += self.basic_rate
         return self.round_up(self.__price * rate, 0.05)
