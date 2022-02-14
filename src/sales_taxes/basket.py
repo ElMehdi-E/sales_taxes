@@ -66,7 +66,7 @@ class ShoppingBasket():
 
     def empty_basket(self) -> None:
         """Resets the shopping basket"""
-        
+
         self.items = []
         self.taxes = 0.0
         self.total_price = 0.0
